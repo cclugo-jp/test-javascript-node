@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
+
+</body>
+</html>
+
+
+<script>
+
+var element = document.getElementById("div1");
+var para = document.createElement("p");
+var node = document.createTextNode("This is new.");
+para.appendChild(node);
+
+function callback1(u) {
+	element.appendChild(u);
+}
+
+function qwer(y, callback1) {
+	alert("asdf");
+	callback1(y);
+}
+qwer(para, callback1);
+
+</script>
+
+<script>
+// var fs = require("fs");
+// var data = fs.readFileSync('text.txt');
+
+// // operacion sincrona
+// console.log(data.toString());
+// console.log("Program Ended");
+
+// console.log('*********************************');
+// // operacion asincrona
+// fs.readFile('text.txt', function (err, data) {
+//    if (err) return console.error(err);
+//    console.log(data.toString());
+// });
+// console.log("Program Ended");
+
+</script>
