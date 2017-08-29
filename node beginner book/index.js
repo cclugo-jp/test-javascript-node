@@ -1,3 +1,5 @@
+// POST text and image
+
 // Server must start with this file with "node index.js" command line
 
 var server = require("./server"); // listener settings
@@ -8,15 +10,10 @@ var requestHandlers = require("./requestHandlers"); // router specific functions
 var handle = {} 
 handle["/"] = requestHandlers.iniciar;
 handle["/iniciar"] = requestHandlers.iniciar;
-handle["/subir"] = requestHandlers.subir;
-handle["/mostrar"] = requestHandlers.mostrar;
+handle["/subirFoto"] = requestHandlers.subirFoto;
+handle["/subirTexto"] = requestHandlers.subirTexto;
+handle["/mostrarFoto"] = requestHandlers.mostrarFoto;
 handle["/favicon.ico"] = requestHandlers.favicon;
-
-// function asdf() {console.log('qwer')}
-// var test = {}
-// test["1"] = asdf;
-// console.log (test["1"]);
-// test["1"]();
 
 // everything start here, also router and requestHandler dependency injected
 server.iniciar(router.route, handle);

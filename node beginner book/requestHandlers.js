@@ -12,14 +12,15 @@ function iniciar(solicitud, respuesta, dataPosteada) { //dataPosteada isn't in u
     '<body>'+
 
     // input form for images
-    '<form action="/subir" method="post" enctype="multipart/form-data">'+
+    '<form action="/subirFoto" method="post" enctype="multipart/form-data">'+
     '<input type="file" name="imagen">'+
     '<input type="submit" value="enviar imagen" />'+
+    '</form>'+
 
     // input form for only text
-    // '<form action="/subir" method="post">'+
-    // '<textarea name="text" rows="20" cols="60"></textarea>'+
-    // '<input type="submit" value="Enviar texto" />'+
+    '<form action="/subirTexto" method="post">'+
+    '<textarea name="text" rows="20" cols="60"></textarea>'+
+    '<input type="submit" value="Enviar texto" />'+
 
     '</form>'+
     '</body>'+
@@ -28,24 +29,10 @@ function iniciar(solicitud, respuesta, dataPosteada) { //dataPosteada isn't in u
     respuesta.writeHead(200, {"Content-Type": "text/html"});
     respuesta.write(body);
     respuesta.end();
-
-  //return "Hola Iniciar"; //for plain html respuesta
 }
 
-// function iniciar() {
-//   console.log("Manipulador de peticion 'iniciar' fue llamado.");
-//   function sleep(milliSeconds) {  
-//     // obten la hora actual
-//     var startTime = new Date().getTime();
-//     // atasca la cpu
-//     while (new Date().getTime() < startTime + milliSeconds); 
-//   }
-//   sleep(10000);
-//   return "Hola Iniciar";
-// }
-
-function subir(solicitud, respuesta) {
-  console.log("Request handler 'subir' was called.");
+function subirFoto(solicitud, respuesta) {
+  console.log("Request handler 'subirFoto' was called.");
   var form = new formidable.IncomingForm();
   console.log("about to parse");
   form.parse(solicitud, function(error, fields, files) {
@@ -60,25 +47,24 @@ function subir(solicitud, respuesta) {
   });
     respuesta.writeHead(200, {"Content-Type": "text/html"});
     respuesta.write("received image:<br/>");
-    respuesta.write("<img src='/mostrar' />");
+    respuesta.write("<img src='/mostrarFoto' />");
     respuesta.end();
   });
 }
 
 // example for POST text
-// function subir(respuesta, dataPosteada) {
-//   console.log("request handler 'subir' ha sido llamado.");
+function subirTexto(solicitud, respuesta, dataPosteada) {
+  console.log("request handler 'subirTexto' ha sido llamado.");
+  console.log(dataPosteada);
 
-//   respuesta.writeHead(200, {"Content-Type": "text/html"});
-//   respuesta.write("Tu enviaste el texto: : " +
-//   querystring.parse(dataPosteada)["text"]);
-//   respuesta.end();
+  respuesta.writeHead(200, {"Content-Type": "text/html"});
+  respuesta.write("Tu enviaste el texto: : " +
+  querystring.parse(dataPosteada)["text"]);
+  respuesta.end();
+}
 
-//   // return "Hola Subir"; //for plain html respuesta
-// }
-
-function mostrar(solicitud, respuesta) { 
-  console.log("request handler 'mostrar' ha sido llamado");
+function mostrarFoto(solicitud, respuesta) { 
+  console.log("request handler 'mostrarFoto' ha sido llamado");
   // you must create a /tmp folder in C:/
   fs.readFile("/tmp/test.png", "binary", function(error, file) {
     if(error) {
@@ -99,6 +85,7 @@ function favicon() {
 }
 
 exports.iniciar = iniciar;
-exports.subir = subir;
-exports.mostrar = mostrar;
+exports.subirFoto = subirFoto;
+exports.subirTexto = subirTexto;
+exports.mostrarFoto = mostrarFoto;
 exports.favicon = favicon;
